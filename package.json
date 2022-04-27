@@ -1,0 +1,59 @@
+{
+  "name": "phonebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "yarn lint --fix",
+    "build:client": "webpack --config ./client/configs/webpack.config.js",
+    "build:client:prod": "NODE_ENV=production npm run build:client",
+    "dev": "NODE_ENV=development nodemon --config ./server/configs/nodemon.json ./server/index.js",
+    "deploy:lambda:init": "NODE_ENV=production claudia create --profile aws-student --handler lambda.handler --deploy-proxy-api --region us-east-1 --keep --runtime nodejs14.x --version test --role phonebook-role-m2damhyx",
+    "deploy:lambda:test": "NODE_ENV=production APP_VERSION=test claudia --runtime nodejs14.x --profile aws-student update --handler lambda.handler --timeout 60 --keep --version test",
+    "deploy:lambda": "NODE_ENV=production APP_VERSION=test yarn build:client:prod && yarn deploy:lambda:test"
+  },
+  "files": [
+    "client",
+    "dist",
+    "server",
+    "lambda.js",
+    "claudia.json"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1120.0",
+    "aws-serverless-express": "^3.4.0",
+    "ejs": "^3.1.7",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.2",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "claudia": "5.14.0",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.29.4",
+    "react": "17",
+    "react-dom": "17",
+    "terser-webpack-plugin": "^5.3.1",
+    "uuid": "^8.3.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

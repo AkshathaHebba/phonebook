@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "phonebook-role-m2damhyx",
+    "name": "phonebook",
+    "region": "us-east-1",
+    "sharedRole": true
+  },
+  "api": {
+    "id": "oag3kwotje"
+  }
+}
